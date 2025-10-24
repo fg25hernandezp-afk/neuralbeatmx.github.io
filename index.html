@@ -2,19 +2,392 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Primera Página Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Proyecto de Música IA</title>
+    
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            display: grid; 
-            place-items: center; 
-            min-height: 100vh; 
-            background-color: #f4f4f4; 
+        /* --- Configuración General --- */
+        :root {
+            --color-fondo: #121212;
+            --color-texto: #e0e0e0;
+            --color-primario: #00ffff; /* Neón Azul/Cian */
+            --color-secundario: #9f00ff; /* Neón Morado */
+            --color-tarjeta: #1e1e1e;
         }
-        h1 { color: #333; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            color: #ffffff;
+            text-shadow: 0 0 5px var(--color-primario);
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; border-bottom: 2px solid var(--color-secundario); display: inline-block; padding-bottom: 5px; }
+
+        section {
+            padding: 60px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* --- Encabezado y Navegación --- */
+        header {
+            background-color: var(--color-tarjeta);
+            border-bottom: 1px solid var(--color-primario);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .contenedor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-primario);
+            text-decoration: none;
+            text-shadow: 0 0 10px var(--color-primario);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            color: var(--color-texto);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--color-primario);
+        }
+
+        /* --- Botones --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primario);
+            color: var(--color-fondo);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            color: #000;
+            box-shadow: 0 0 15px var(--color-primario);
+        }
+
+        /* --- 1. Sección Home (Banner) --- */
+        #home {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)), url('https://via.placeholder.com/1500x800.png?text=Fondo+Musical+Oscuro');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+        }
+        
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* --- 2. Sección Canciones (Discografía) --- */
+        .galeria-canciones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .cancion-card {
+            background-color: var(--color-tarjeta);
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .cancion-card:hover {
+            border-color: var(--color-primario);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .cancion-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .cancion-info {
+            padding: 20px;
+        }
+
+        .cancion-info h3 {
+            margin-top: 0;
+            color: var(--color-primario);
+        }
+
+        .cancion-info audio {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .cancion-info .btn {
+            margin-right: 10px;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
+        
+        .btn-secundario {
+            background-color: transparent;
+            border: 1px solid var(--color-secundario);
+            color: var(--color-secundario);
+        }
+        
+        .btn-secundario:hover {
+            background-color: var(--color-secundario);
+            color: var(--color-fondo);
+            box-shadow: 0 0 15px var(--color-secundario);
+        }
+
+        /* --- 4. Sección Acerca de --- */
+        #acerca {
+            background-color: var(--color-tarjeta);
+        }
+
+        /* --- 6. Sección Contacto --- */
+        form {
+            max-width: 600px;
+            margin: 30px auto 0 auto;
+        }
+        
+        .form-grupo {
+            margin-bottom: 20px;
+        }
+        
+        .form-grupo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-grupo input,
+        .form-grupo textarea {
+            width: 95%;
+            padding: 12px;
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: var(--color-texto);
+            font-size: 1rem;
+        }
+        
+        .form-grupo input:focus,
+        .form-grupo textarea:focus {
+            outline: none;
+            border-color: var(--color-primario);
+        }
+
+        /* --- Footer (Pie de página) --- */
+        footer {
+            background-color: var(--color-tarjeta);
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #333;
+        }
+        
+        .redes-sociales a {
+            color: var(--color-texto);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .redes-sociales a:hover {
+            color: var(--color-primario);
+        }
+
     </style>
-</head>
+    </head>
 <body>
-    <h1>¡Hola, Mundo! Mi sitio en GitHub Pages funciona.</h1>
+
+    <header>
+        <div class="contenedor">
+            <a href="#home" class="logo">ARTISTA IA</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#canciones">Canciones</a></li>
+                    <li><a href="#novedades">Novedades</a></li>
+                    <li><a href="#acerca">Acerca de</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <div class="contenedor">
+                <h1>Canciones hechas con IA</h1>
+                <p>Que sienten como humanas.</p>
+                <a href="#canciones" class="btn">Explorar Música</a>
+            </div>
+        </section>
+
+        <section id="canciones">
+            <div class="contenedor">
+                <h2>Discografía</h2>
+                <div class="galeria-canciones">
+
+                    <div class="cancion-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Arte+de+Álbum+1" alt="Portada de Ecos Digitales">
+                        <div class="cancion-info">
+                            <h3>Ecos Digitales</h3>
+                            <p>Una balada futurista sobre recuerdos perdidos.</p>
+                            <audio controls src="URL_A_TU_ARCHIVO.mp3" style="width: 100%;">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <a href="#" class="btn">YouTube</a>
+                            <a href="#" class="btn btn-secundario">Descargar</a>
+                        </div>
+                    </div>
+
+                    <div class="cancion-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Arte+de+Álbum+2" alt="Portada de Ritmo Neón">
+                        <div class="cancion-info">
+                            <h3>Ritmo Neón</h3>
+                            <p>Pista electrónica para la medianoche.</p>
+                            <audio controls src="URL_A_TU_ARCHIVO.mp3" style="width: 100%;">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <a href="#" class="btn">YouTube</a>
+                            <a href="#" class="btn btn-secundario">Descargar</a>
+                        </div>
+                    </div>
+
+                    <div class="cancion-card">
+                        <img src="https://via.placeholder.com/300x300.png?text=Arte+de+Álbum+3" alt="Portada de Susurro Cuántico">
+                        <div class="cancion-info">
+                            <h3>Susurro Cuántico</h3>
+                            <p>Sonidos ambientales generados por IA.</p>
+                            <audio controls src="URL_A_TU_ARCHIVO.mp3" style="width: 100%;">
+                                Tu navegador no soporta audio.
+                            </audio>
+                            <a href="#" class="btn">YouTube</a>
+                            <a href="#" class="btn btn-secundario">Descargar</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="novedades">
+            <div class="contenedor">
+                <h2>Novedades</h2>
+                <p>Aquí pondrías las noticias de tus lanzamientos o mini historias. Como esto es un archivo estático, tendrías que editar el HTML cada vez que quieras agregar una "nueva" noticia.</p>
+                
+                <div class="cancion-card">
+                     <div class="cancion-info">
+                        <h3>¡Nuevo Lanzamiento! "Ritmo Neón" ya disponible</h3>
+                        <p>Estoy emocionado de lanzar mi nueva pista... (etc.)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="acerca">
+            <div class="contenedor">
+                <h2>Acerca del Proyecto</h2>
+                <p>Este proyecto nació de la idea de explorar si la inteligencia artificial puede crear no solo música, sino emociones. Cada pista es un experimento que busca conectar con la experiencia humana, usando algoritmos como pincel.</p>
+                <p>Mi concepto artístico es... (aquí va tu mensaje).</p>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <div class="contenedor">
+                <h2>Contacto</h2>
+                <p>¿Interesado en una colaboración, un encargo o simplemente quieres saludar?</p>
+                
+                <form action="#" method="POST">
+                    <div class="form-grupo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="contenedor">
+            <div class="redes-sociales">
+                <a href="#" title="TikTok">Tik</a>
+                <a href="#" title="YouTube">You</a>
+                <a href="#" title="Instagram">Insta</a>
+                <a href="#" title="Telegram">Tele</a>
+            </div>
+            <p>&copy; 2025 Artista IA. Todos los derechos reservados.</p>
+            <p>Hecho con ❤️ y GitHub Pages</p>
+        </div>
+    </footer>
+
 </body>
 </html>
